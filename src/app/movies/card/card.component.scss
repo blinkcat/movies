@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  position: relative;
+}
+
+.post {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+}
+
+.title {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+}
+
+.rate {
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  width: 32px;
+  height: 18px;
+  line-height: 18px;
+  top: 4px;
+  left: -4px;
+  position: absolute;
+  background-color: #aaa;
+  border-radius: 2px;
+  &.high {
+    background-color: #3bb33b;
+  }
+}

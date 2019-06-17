@@ -1,0 +1,5 @@
+<div class="rate" [class.high]="movie?.vote_average > 7">
+  {{ movie?.vote_average }}
+</div>
+<img class="post" [attr.src]="posterPath" />
+<p class="title">{{ movie?.title }}</p>

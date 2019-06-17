@@ -1,0 +1,45 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "serve",
+      "type": "shell",
+      "command": "ng serve movies",
+      "problemMatcher": []
+    },
+    {
+      "label": "serve-hmr",
+      "type": "shell",
+      "command": "ng serve movies --configuration=hmr",
+      "problemMatcher": []
+    },
+    {
+      "label": "serve-aot",
+      "type": "shell",
+      "command": "ng serve movies --aot=true",
+      "problemMatcher": []
+    },
+    {
+      "label": "serve-ip",
+      "type": "shell",
+      "command": "ng serve movies --host=0.0.0.0",
+      "problemMatcher": []
+    },
+    {
+      "label": "build-prod",
+      "type": "shell",
+      "command": "ng build movies --configuration=production",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "build-dist",
+      "type": "shell",
+      "command": "ng build movies --configuration=production --baseHref=/dist",
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ]
+}

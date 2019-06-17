@@ -1,0 +1,27 @@
+<div
+  class="list"
+  infiniteScroll
+  [infiniteScrollDistance]="1"
+  [infiniteScrollDisabled]="!anyMore"
+  (scrolled)="scrolled.next()"
+>
+  <ng-container *ngIf="listItem; else defualt">
+    <div
+      *ngFor="let item of list; index as i; trackBy: trackByFn"
+      [ngClass]="clss"
+    >
+      <ng-template
+        [ngTemplateOutlet]="listItem"
+        [ngTemplateOutletContext]="{ $implicit: item, index: i }"
+      ></ng-template>
+    </div>
+  </ng-container>
+  <ng-template #defualt>
+    <div *ngFor="let item of list; trackBy: trackByFn" class="default-item">
+      <pre>
+    {{ item | json }}
+  </pre
+      >
+    </div>
+  </ng-template>
+</div>

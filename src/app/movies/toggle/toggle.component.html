@@ -1,0 +1,8 @@
+<a
+  class="item"
+  *ngFor="let item of items$ | async; trackBy: trackByFn"
+  [routerLink]="item.link"
+  routerLinkActive="active"
+>
+  {{ item.label }}
+</a>

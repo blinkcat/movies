@@ -1,0 +1,33 @@
+:host {
+  display: block;
+  padding: 8px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.default-item {
+  padding: 8px 16px;
+  margin-bottom: 8px;
+  background: #fff;
+  pre {
+    overflow: scroll;
+  }
+}
+
+.item {
+  box-sizing: border-box;
+  padding: 8px;
+  &.column-1 {
+    width: 100%;
+  }
+  &.column-2 {
+    width: 50%;
+  }
+  &.column-3 {
+    width: 33.3333%;
+  }
+}

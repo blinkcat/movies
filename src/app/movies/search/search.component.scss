@@ -1,0 +1,26 @@
+:host {
+  color: rgb(122, 140, 153);
+  display: block;
+  padding: 0 16px;
+}
+
+.wrapper {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  &:focus-within {
+    box-shadow: 0 0 0 2px #ff9f1c;
+  }
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding-left: 4px;
+}
