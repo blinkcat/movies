@@ -45,6 +45,7 @@ export class MediatorService {
   fetchFirstPage() {
     return this.mediatorQuery.hasNeverFetchedSelectedTypeMovies$
       .pipe(
+        take(1),
         filter(should => should),
         switchMap(() => this.mediatorQuery.selectedType$),
         take(1),
