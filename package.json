@@ -7,7 +7,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-gh-pages": "ng build movies --configuration=production --deployUrl=https://blinkcat.github.io/movies/ --outputPath=dist",
+    "add-nojekyll": "touch dist/.nojekyll"
   },
   "private": true,
   "dependencies": {

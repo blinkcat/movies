@@ -35,9 +35,9 @@
       "group": "build"
     },
     {
-      "label": "build-dist",
+      "label": "build-gh-pages",
       "type": "shell",
-      "command": "ng build movies --configuration=production --baseHref=/dist",
+      "command": "yarn build-gh-pages",
       "problemMatcher": [],
       "group": "build"
     }

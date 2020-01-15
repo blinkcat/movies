@@ -16,7 +16,7 @@ export const TMDB_CONFIG = new InjectionToken<any>('tmdb.config');
 // https://developers.themoviedb.org/3/getting-started/images
 export const defaultConfig: TmdbConfig = {
   apiEndPoint: 'https://api.themoviedb.org/3',
-  imageBaseUrl: 'http://image.tmdb.org/t/p/',
+  imageBaseUrl: 'https://image.tmdb.org/t/p/',
   backdropSize: 'w780',
   logoSize: 'w300',
   posterSize: 'w300',

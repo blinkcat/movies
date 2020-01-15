@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - 'node'
+cache:
+  yarn: true
+script: yarn build-gh-pages
+after_success: yarn add-nojekyll
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: '$GITHUB_TOKEN'
+  local_dir: './dist'
+  on:
+    branch: master
