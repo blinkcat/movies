@@ -4,7 +4,7 @@ node_js:
 cache:
   yarn: true
 script: yarn build-gh-pages
-after_success: yarn add-nojekyll
+after_success: yarn add-staff
 deploy:
   provider: pages
   skip_cleanup: true
