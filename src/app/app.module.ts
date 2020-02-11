@@ -1,4 +1,8 @@
-import { BrowserModule, Title } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  Title,
+  BrowserTransferStateModule
+} from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +16,8 @@ import { CoreModule } from './core/core.module';
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserTransferStateModule,
     HttpClientModule,
     CoreModule,
     MoviesModule,

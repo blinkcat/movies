@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
+import { makeStateKey, TransferState } from '@angular/platform-browser';
+import { isPlatformServer } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Store, transaction } from '@datorama/akita';
-import { combineLatest, EMPTY } from 'rxjs';
+import { combineLatest, EMPTY, of } from 'rxjs';
 import { tap, finalize, take, filter, switchMap } from 'rxjs/operators';
 
 import { MoviesStore, MovieType } from './movies/movies.store';
@@ -31,6 +33,10 @@ export class MediatorService {
     [MovieType.search]: '/search/movie'
   };
 
+  private readonly ApiResponseKey = makeStateKey<ApiResponse>(
+    'first-page-data'
+  );
+
   constructor(
     private httpClient: HttpClient,
     private moviesStore: MoviesStore,
@@ -39,7 +45,9 @@ export class MediatorService {
     private topRatedStore: TopRatedStore,
     private upcomingStore: UpcomingStore,
     private searchMovieStore: SearchMovieStore,
-    private mediatorQuery: MediatorQuery
+    private mediatorQuery: MediatorQuery,
+    @Inject(PLATFORM_ID) private platformId: object,
+    private transferState: TransferState
   ) {}
 
   fetchFirstPage() {
@@ -55,11 +63,11 @@ export class MediatorService {
   }
 
   fetchNextPage() {
-    return combineLatest(
+    return combineLatest([
       this.mediatorQuery.selectedType$,
       this.mediatorQuery.anyMoreSelectedTypeMovies$,
       this.mediatorQuery.pageOfSelectedTypeMovies$
-    )
+    ])
       .pipe(
         take(1),
         filter(([_, hasMore, __]) => !!hasMore),
@@ -157,17 +165,33 @@ export class MediatorService {
   }
 
   private getMovies(type: MovieType, page: number) {
-    return this.httpClient.get<ApiResponse>(this.API_URL[type], {
-      params:
-        type === MovieType.search
-          ? {
-              query: this.mediatorQuery.searchQueryStr || '',
-              page: page + ''
-            }
-          : {
-              page: '' + page
-            }
-    });
+    if (this.transferState.hasKey(this.ApiResponseKey)) {
+      const res = this.transferState.get<ApiResponse>(this.ApiResponseKey, {});
+
+      this.transferState.remove(this.ApiResponseKey);
+
+      return of(res);
+    }
+
+    return this.httpClient
+      .get<ApiResponse>(this.API_URL[type], {
+        params:
+          type === MovieType.search
+            ? {
+                query: this.mediatorQuery.searchQueryStr || '',
+                page: page + ''
+              }
+            : {
+                page: '' + page
+              }
+      })
+      .pipe(
+        tap(res => {
+          if (isPlatformServer(this.platformId)) {
+            this.transferState.set(this.ApiResponseKey, res);
+          }
+        })
+      );
   }
 
   private getSelectedStore(type: MovieType): Store<Pagination> {
