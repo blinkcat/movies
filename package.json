@@ -28,7 +28,7 @@
     "@angular/router": "~9.0.0",
     "@datorama/akita": "^4.17.1",
     "@nguniversal/express-engine": "^9.0.0",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "ngx-infinite-scroll": "^8.0.1",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.5.4",
